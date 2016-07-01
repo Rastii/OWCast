@@ -22,7 +22,7 @@
           is: function(x) {
             return {
               against: function() {
-                return enemyTeam.filter(enemy => {
+                return enemyTeam.filter(function(enemy) {
                   return scores[hero] && scores[hero][enemy] == x;
                 });
               }
@@ -33,8 +33,8 @@
 
       var heroes = Object.keys(scores);
       // Assign a score to each hero that describes how strong it is against the enemy team as a whole
-      var heroScores = heroes.map(hero => {
-        var scoreSum = enemyTeam.reduce((sum, enemyHero) => {
+      var heroScores = heroes.map(function(hero) {
+        var scoreSum = enemyTeam.reduce(function(sum, enemyHero) {
           // if hero is strong against enemyHero, then score[hero][enemyHero] = 1
           var score = scores[hero] && scores[hero][enemyHero];
           if (score != undefined) {
@@ -46,12 +46,12 @@
       });
 
       // Sort the heroes descending by score and grab the first 6
-      var topHeroes = heroScores.sort((a, b) => {
+      var topHeroes = heroScores.sort(function(a, b) {
         return b.score - a.score;
       }).slice(0, 6);
 
       // Return some additional info with the top heroes
-      return topHeroes.map(hero => {
+      return topHeroes.map(function(hero) {
         return {
           hero: hero.name,
           strongAgainst: enemies(hero.name).isStrongAgainst(),
