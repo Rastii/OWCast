@@ -7,14 +7,20 @@
 
   function routeConfig($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+      .when('/select', {
+          template: '<div character-selection></div>'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/select'
       });
+      /*
+      .when('/', {
+          templateUrl: 'app/main/main.html',
+          controller: 'MainController',
+          controllerAs: 'main'
+        })
+    */
+
   }
 
 })();

@@ -1,0 +1,43 @@
+<div>
+    <div>
+        <h3>Attack Chars</h3>
+        <div ng-repeat="char in charSel.attackChars">
+            {{char.displayName}}
+            <span ng-click="charSel.addCharacterToSelection(char.name)">[ + ]</span>
+            <span>[ {{charSel.getCharacterSelectCount(char.name)}} ]</span>
+            <span ng-click="charSel.removeCharacterFromSelection(char.name)">[ - ]</span>
+        </div>
+    </div>
+    <div>
+        <h3>Defense Chars</h3>
+        <div ng-repeat="char in charSel.defenseChars">
+            {{char.displayName}}
+            <span ng-click="charSel.addCharacterToSelection(char.name)">[ + ]</span>
+            <span>[ {{charSel.getCharacterSelectCount(char.name)}} ]</span>
+            <span ng-click="charSel.removeCharacterFromSelection(char.name)">[ - ]</span>
+        </div>
+    </div>
+    <div>
+        <h3>Tank Chars</h3>
+        <div ng-repeat="char in charSel.tankChars">
+            {{char.displayName}}
+            <span ng-click="charSel.addCharacterToSelection(char.name)">[ + ]</span>
+            <span>[ {{charSel.getCharacterSelectCount(char.name)}} ]</span>
+            <span ng-click="charSel.removeCharacterFromSelection(char.name)">[ - ]</span>
+        </div>
+    </div>
+    <div>
+        <h3>Support Chars</h3>
+        <div ng-repeat="char in charSel.supportChars">
+            {{char.displayName}}
+            <span ng-click="charSel.addCharacterToSelection(char.name)">[ + ]</span>
+            <span>[ {{charSel.getCharacterSelectCount(char.name)}} ]</span>
+            <span ng-click="charSel.removeCharacterFromSelection(char.name)">[ - ]</span>
+        </div>
+    </div>
+
+    <div>
+        <h3>SELECTED CHARACTER INFO!</h3>
+        {{charSel.getCharactersSelected()}}
+    </div>
+</div>
