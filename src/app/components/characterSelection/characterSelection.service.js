@@ -177,11 +177,14 @@
 
     /** @ngInject */
     function characterSelectionSvc($log) {
+        var selectionSvc = this;
         // Expose some constants
         this.ATTACK_GROUP = Object.freeze(ATTACK);
         this.DEFENSE_GROUP = Object.freeze(DEFENSE);
         this.TANK_GROUP = Object.freeze(TANK);
         this.SUPPORT_GROUP = Object.freeze(SUPPORT);
+        // This constant is the default GET param key that will be used to store the current enemy team selection
+        this.DEFAULT_GET_PARAM_KEY = Object.freeze('enemyTeam');
 
         // The initial state of the service has no characters selected.
         // A dictionary of all the characters with the values set to 0
@@ -291,5 +294,18 @@
                     return $log.warn('Unknown group type: ' + group);
             }
         };
+
+        this.selectionToGetParams = function(location, key) {
+            key = key || selectionSvc.DEFAULT_GET_PARAM_KEY;
+            location.search(key, selectedCharactersArray.join(','));
+        };
+
+        this.getParamsToSelection = function(location, key) {
+            key = key || selectionSvc.DEFAULT_GET_PARAM_KEY;
+            var selection = (location.search()[key] || '').split(',');
+            selection.forEach(function(character) {
+               selectionSvc.addCharacter(character);
+            });
+        }
     }
 })();

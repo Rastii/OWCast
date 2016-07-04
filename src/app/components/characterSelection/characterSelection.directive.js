@@ -19,7 +19,7 @@
         };
 
         /** @ngInject */
-        function characterSelectionCtrl($log, toastr, characterSelectionSvc) {
+        function characterSelectionCtrl($log, $location, toastr, characterSelectionSvc) {
             // Ensure that onCharacterSelection is a function, otherwise throw programmer error!
             if(!angular.isFunction(this.onCharacterSelection)) {
                 throw new Error(
@@ -38,6 +38,10 @@
             this.supportChars = characterSelectionSvc
                 .getAvailableCharactersByGroup(characterSelectionSvc.SUPPORT_GROUP);
 
+            // Initialize selection based on getParams
+            characterSelectionSvc.getParamsToSelection($location);
+            this.onCharacterSelection(characterSelectionSvc.getCharactersSelectedArray());
+
             // Expose adding/removing character from controller
             this.addCharacterToSelection = function(name) {
                 // Check to see if we already have 6 characters, can't add more than that!
@@ -45,14 +49,14 @@
                     return toastr.error('A team cannot have more than 6 players!');
                 }
                 characterSelectionSvc.addCharacter(name);
-
+                characterSelectionSvc.selectionToGetParams($location);
                 // Trigger onSelection callback
                 this.onCharacterSelection(characterSelectionSvc.getCharactersSelectedArray());
             };
 
-            this.removeCharacterFromSelection = characterSelectionSvc.removeCharacter;
             this.removeCharacterFromSelection = function(characterName) {
                 characterSelectionSvc.removeCharacter(characterName);
+                characterSelectionSvc.selectionToGetParams($location);
                 this.onCharacterSelection(characterSelectionSvc.getCharactersSelectedArray());
             };
             this.getCharacterSelectCount = characterSelectionSvc.getCharacterSelectCount;

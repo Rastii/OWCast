@@ -1,25 +1,39 @@
-(function() {
-  'use strict';
+(function () {
+    'use strict';
 
-  angular
-    .module('owcast')
-    .config(routeConfig);
+    angular
+        .module('owcast')
+        .config(routeConfig);
 
-  function routeConfig($routeProvider) {
-    $routeProvider
-      .when('/select', {
-          template: '<selection-generator-view></selection-generator-view>',
-          resolve: {
-              /** @ngInject */
-              'counterGeneratorData': function(counterGeneratorData) {
-                  return counterGeneratorData.defaultDataPromise;
-              }
-          }
-      })
-      .otherwise({
-        redirectTo: '/select'
-      });
+    /** @ngInject */
+    function routeConfig($routeProvider, $locationProvider) {
+        // Let's run in HTML 5 mode!
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
 
-  }
+        $routeProvider
+            .when('/select', {
+                template: '<selection-generator-view></selection-generator-view>',
+                reloadOnSearch: false,
+                resolve: {
+                    /** @ngInject */
+                    'counterGeneratorData': function (counterGeneratorData) {
+                        return counterGeneratorData.defaultDataPromise;
+                    }
+                }
+            })
+            .when('/matrixData', {
+               // TODO 
+            })
+            .when('/matrixData/import', {
+                // TODO
+            })
+            .otherwise({
+                redirectTo: '/select'
+            });
+
+    }
 
 })();
