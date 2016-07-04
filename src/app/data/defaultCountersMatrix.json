@@ -1,0 +1,190 @@
+{
+  "reaper": {
+    "symmetra": 1,
+    "winston": 1,
+    "pharah": -1,
+    "zarya": 1,
+    "mccree": -1,
+    "roadhog": 1,
+    "mei": 1
+  },
+  "bastion": {
+    "tracer": -1,
+    "winston": 1,
+    "genji": -1,
+    "widowmaker": -1,
+    "junkrat": -1,
+    "hanzo": -1,
+    "mccree": 1,
+    "reinhardt": 1,
+    "roadhog": 1,
+    "zarya": 1,
+    "dva": 1
+  },
+  "tracer": {
+    "bastion": 1,
+    "winston": -1,
+    "symmetra": -1,
+    "torbjorn": -1,
+    "hanzo": 1,
+    "mccree": -1,
+    "reinhardt": 1,
+    "roadhog": -1,
+    "zenyatta": 1
+  },
+  "winston": {
+    "reaper": -1,
+    "bastion": -1,
+    "tracer": 1,
+    "symmetra": 1,
+    "genji": 1,
+    "widowmaker": 1,
+    "zenyatta": -1,
+    "hanzo": 1,
+    "mccree": -1,
+    "mei": -1
+  },
+  "torbjorn": {
+    "tracer": 1,
+    "soldier76": -1,
+    "reinhardt": -1,
+    "widowmaker": -1,
+    "junkrat": -1
+  },
+  "zenyatta": {
+    "torbjorn": -1,
+    "hanzo": -1,
+    "tracer": -1,
+    "winston": 1,
+    "widowmaker": -1
+  },
+  "soldier76": {
+    "reinhardt": -1,
+    "roadhog": -1,
+    "pharah": 1
+  },
+  "reinhardt": {
+    "bastion": -1,
+    "tracer": -1,
+    "symmetra": -1,
+    "junkrat": -1,
+    "pharah": -1,
+    "torbjorn": 1,
+    "mccree": -1,
+    "soldier76": 1
+  },
+  "roadhog": {
+    "reaper": -1,
+    "bastion": -1,
+    "tracer": 1,
+    "soldier76": 1,
+    "genji": 1,
+    "pharah": 1
+  },
+  "dva": {
+    "bastion": -1,
+    "symmetra": -1,
+    "widowmaker": 1,
+    "zenyatta": -1,
+    "hanzo": 1,
+    "zarya": -1,
+    "mei": -1
+  },
+  "symmetra": {
+    "reaper": -1,
+    "symmetra": 1,
+    "winston": -1,
+    "genji": 1,
+    "pharah": -1,
+    "zarya": -1,
+    "mccree": -1,
+    "reinhardt": 1,
+    "roadhog": -1
+  },
+  "genji": {
+    "bastion": 1,
+    "winston": -1,
+    "symmetra": -1,
+    "widowmaker": 1,
+    "hanzo": 1,
+    "zarya": -1,
+    "soldier76": 1,
+    "roadhog": -1,
+    "mei": -1
+  },
+  "widowmaker": {
+    "bastion": 1,
+    "winston": -1,
+    "genji": -1,
+    "pharah": 1,
+    "torbjorn": 1,
+    "hanzo": 1,
+    "mccree": 1,
+    "reinhardt": -1,
+    "zenyatta": 1,
+    "dva": -1,
+    "mei": 1
+  },
+  "junkrat": {
+    "reaper": -1,
+    "bastion": 1,
+    "hanzo": -1,
+    "torbjorn": 1,
+    "pharah": -1
+  },
+  "pharah": {
+    "reaper": 1,
+    "symmetra": 1,
+    "tracer": 1,
+    "widowmaker": -1,
+    "junkrat": 1,
+    "torbjorn": 1,
+    "hanzo": -1,
+    "zarya": 1,
+    "soldier76": -1,
+    "reinhardt": 1,
+    "roadhog": -1,
+    "mei": 1
+  },
+  "hanzo": {
+    "bastion": 1,
+    "tracer": -1,
+    "winston": -1,
+    "genji": -1,
+    "widowmaker": -1,
+    "junkrat": 1,
+    "pharah": 1,
+    "torbjorn": 1,
+    "zenyatta": 1,
+    "mccree": 1,
+    "dva": -1
+  },
+  "mccree": {
+    "reaper": 1,
+    "bastion": -1,
+    "tracer": 1,
+    "winston": 1,
+    "symmetra": 1,
+    "widowmaker": -1,
+    "hanzo": -1,
+    "reinhardt": 1
+  },
+  "zarya": {
+    "bastion": -1,
+    "symmetra": 1,
+    "genji": 1,
+    "dva": 1,
+    "pharah": -1
+  },
+  "lucio": {},
+  "mercy": {},
+  "mei": {
+    "winston": 1,
+    "genji": 1,
+    "widowmaker": -1,
+    "junkrat": -1,
+    "pharah": -1,
+    "dva": 1,
+    "mei": 1
+  }
+}

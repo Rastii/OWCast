@@ -8,18 +8,17 @@
   function routeConfig($routeProvider) {
     $routeProvider
       .when('/select', {
-          template: '<div character-selection></div>'
+          template: '<selection-generator-view></selection-generator-view>',
+          resolve: {
+              /** @ngInject */
+              'counterGeneratorData': function(counterGeneratorData) {
+                  return counterGeneratorData.defaultDataPromise;
+              }
+          }
       })
       .otherwise({
         redirectTo: '/select'
       });
-      /*
-      .when('/', {
-          templateUrl: 'app/main/main.html',
-          controller: 'MainController',
-          controllerAs: 'main'
-        })
-    */
 
   }
 

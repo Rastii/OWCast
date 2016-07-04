@@ -166,10 +166,12 @@
         supportCharacterList
     );
 
+    var allCharacterNamesArray = [];
     // Keep a reference of all the available character names as a lookup "dictionary"
     // We can then use this to log potential errors of invalid characters being used.
     var allCharacterNames = allCharacterList.reduce(function(obj, char) {
         obj[char.name] = true;
+        allCharacterNamesArray.push(char.name);
         return obj;
     }, {});
 
@@ -187,19 +189,35 @@
             obj[char.name] = 0;
             return obj;
         }, {});
+        // A simple data structure that just contains all the characters selected as an array
+        // for example, [ 'hanzo', 'genji', 'hanzo', 'mei' ]
+        var selectedCharactersArray = [];
 
-        this.getCharactersSelected = function() {
-            var sum = 0;
-            var characters = [];
-            angular.forEach(selectedCharacters, function(value, key) {
-                if(value <= 0) { return; }
-                sum += value;
-                characters.push({ name: key, amount: value });
-            });
-           
-            return { sum: sum, characters: characters };
+        /**
+         * Method returns a copy of the original selected characters array.
+         * We don't want to return the original reference since modifying that array
+         * may break the functionality of this service.
+         *
+         * Modification of the array is strictly dependant on the methods exposed
+         * by this service.
+         */
+        this.getCharactersSelectedArray = function() {
+            return angular.copy(selectedCharactersArray);
         };
-        
+
+        /**
+         * Method simply returns the amount of selected characters.
+         * @returns {Number}
+         */
+        this.getNumberSelectedCharacters = function() {
+            return selectedCharactersArray.length;
+        };
+
+        /**
+         * Method the amount of the same selected characters.
+         * @param characterName
+         * @returns {*}
+         */
         this.getCharacterSelectCount = function(characterName) {
             if(!allCharacterNames[characterName]) {
                 $log.warn(
@@ -211,15 +229,32 @@
             return selectedCharacters[characterName];
         };
 
+        /**
+         * Method adds a character to two data structures, our object that maintains the count of
+         * each characters `selectedCharacters` and pushes the characterName to the `selectedCharactersArray`
+         *
+         * If the characterName parameter is invalid, an warning message will be logged and
+         * the value returned will be null.
+         *
+         * @param characterName String, identifier of a character
+         * @returns {*}
+         */
         this.addCharacter = function(characterName) {
             if(!allCharacterNames[characterName]) {
                 return $log.warn(
                     'Attempted to add a non-existing character: ' + characterName
                 );
             }
+            selectedCharactersArray.push(characterName);
             return selectedCharacters[characterName]++;
         };
 
+        /**
+         * Method removes a character from both data structures.  In our count data structure, it will
+         * decrease the value by 1 (with a min threshold of 0, that is, if value is 0 and remove is applied
+         * @param characterName
+         * @returns {*}
+         */
         this.removeCharacter = function(characterName) {
             if(!allCharacterNames[characterName]) {
                 return $log.warn(
@@ -229,17 +264,20 @@
 
             // Subtract from the current value stored unless it goes below 0
             var curVal = selectedCharacters[characterName];
-            selectedCharacters[characterName] = --curVal < 0 ? 0 : curVal;
+            if(curVal > 0) {
+                selectedCharacters[characterName]--;
+                selectedCharactersArray.splice(selectedCharactersArray.indexOf(characterName), 1);
+            }
         };
 
         /**
          * Return an array of all the characters available.
          */
-        this.getCharacters = function() {
+        this.getAllAvailableCharacters = function() {
             return angular.copy(allCharacterList);
         };
 
-        this.getCharactersByGroup = function(group) {
+        this.getAvailableCharactersByGroup = function(group) {
             switch(group) {
                 case ATTACK:
                     return angular.copy(attackCharacterList);
