@@ -60,7 +60,6 @@
             index: 5
         },
     ];
-
     var defenseCharacterList = [
         {
             name: 'bastion',
@@ -99,7 +98,6 @@
             index: 5
         },
     ];
-
     var tankCharacterList = [
         {
             name: 'dva',
@@ -132,7 +130,6 @@
             index: 4
         },
     ];
-
     var supportCharacterList = [
         {
             name: 'lucio',
@@ -295,14 +292,26 @@
             }
         };
 
+        /**
+         * Method applies the current selection to the URL GET params as comma seperated values
+         * based on the selectedCharactersArray.
+         * @param location $location angular service
+         * @param key key to be used in URL (optional)
+         */
         this.selectionToGetParams = function(location, key) {
             key = key || selectionSvc.DEFAULT_GET_PARAM_KEY;
-            location.search(key, selectedCharactersArray.join(','));
+            location.search(key, selectedCharactersArray.join(',') || null);
         };
 
+        /**
+         * Method applies GET parameters in the URL to the current selection.
+         * @param location $location angular service
+         * @param key key to be used to retrive GET params
+         */
         this.getParamsToSelection = function(location, key) {
             key = key || selectionSvc.DEFAULT_GET_PARAM_KEY;
-            var selection = (location.search()[key] || '').split(',');
+            var selection = location.search()[key];
+            selection = (angular.isString(selection) ? selection.split(',') : []);
             selection.forEach(function(character) {
                selectionSvc.addCharacter(character);
             });

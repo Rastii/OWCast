@@ -26,10 +26,6 @@
                 // TODO: Make user allow to choose other than default
                 var matrixData = counterGeneratorData.getMatrixData('default');
                 var counterData = counterGenerator.getCounterPlayers(characterSelection, matrixData);
-                // Generate new counter cast
-                //var counterCastList = counterGenerator.getCounterPlayers(characterSelection, matrixData);
-                // Change the list to the new cast
-                //this.counterCastModel.changeList(counterCastList);
                 controller.counterCastModel.updateList(counterData);
             }
         }

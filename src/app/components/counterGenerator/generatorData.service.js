@@ -7,6 +7,7 @@
 
     /** @ngInject */
     function counterGeneratorData($http, $log, $window, toastr) {
+        var LOCALSTORAGE_KEY_PREFIX = Object.freeze('matrixData.');
         /**
          * Here we are specifying the matrix data as an empty dictionary that will
          * be appended as data is loaded either through the default json file
@@ -37,9 +38,16 @@
 
         /**
          * The purpose of this function is to load saved data from the local storage
+         * We can distinguish the matrix data based on the known prefix
          */
         function loadLocalStorageData() {
-            // TODO: Implement local storage functionality...
+            var localStorage = $window.localStorage;
+            for(var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if(key.startsWith(LOCALSTORAGE_KEY_PREFIX)) {
+                    matrixData[key] = JSON.parse(localStorage.getItem(key));
+                }
+            }
         }
 
         // Expose the default data promise so we can use $route resolve and not load the
@@ -62,14 +70,17 @@
                 $log.warn('Attempted to access invalid counter matrix data: ', dataKey);
                 return null;
             }
-
-            // Note: angular.copy will remove the 'frozen' state of any object thus making it mutable.
+            // Note: angular.copy will remove the 'frozen' state of
+            // ny object thus making it mutable.
             return isMutable ? angular.copy(data) : data;
         };
 
         this.setMatrixData = function(dataKey, data) {
             matrixData[dataKey] = Object.freeze(data);
-            // TODO: Make procedure to store this in localStorage as well
+            $window.localStorage.setItem(
+                LOCALSTORAGE_KEY_PREFIX + dataKey,
+                JSON.stringify(data)
+            );
         };
     }
 })();
