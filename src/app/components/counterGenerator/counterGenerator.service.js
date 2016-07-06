@@ -45,14 +45,15 @@
                 }, 0);
                 return {name: hero, score: scoreSum};
             });
-
-            // Sort the heroes descending by score and grab the first 6
-            var topHeroes = heroScores.sort(function (a, b) {
+            // Filter heroes that have no score
+            var bestAndWorstHeroes = heroScores.filter(function(hero) {
+                return hero.score != 0;
+            }).sort(function (a, b) {
                 return b.score - a.score;
-            }).slice(0, 6);
+            });
 
             // Return some additional info with the top heroes
-            return topHeroes.map(function (hero) {
+            return bestAndWorstHeroes.map(function (hero) {
                 return {
                     hero: hero.name,
                     strongAgainst: enemies(hero.name).isStrongAgainst(),
