@@ -25,7 +25,13 @@
                 }
             })
             .when('/matrixData', {
-               // TODO 
+                template: '<counter-matrix-table></counter-matrix-table>',
+                resolve: {
+                    /** @ngInject */
+                    'counterGeneratorData': function (counterGeneratorData) {
+                        return counterGeneratorData.defaultDataPromise;
+                    }
+                }
             })
             .when('/matrixData/import', {
                 // TODO

@@ -1,0 +1,20 @@
+<table class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>#</th>
+            <!-- We can "bind-once" the following because the characters should never change -->
+            <th ng-repeat="c in ::ctrMatrixTable.allCharacterObjectArray">
+                {{::c.displayName}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="yChar in ::ctrMatrixTable.allCharacterObjectArray">
+            <td><strong>{{::yChar.displayName}}</strong></td>
+            <td ng-repeat="xChar in ::ctrMatrixTable.allCharacterObjectArray"
+                ng-click="ctrMatrixTable.model.toggleCell(xChar.name, yChar.name)">
+                {{ctrMatrixTable.model.data[xChar.name][yChar.name]}}
+            </td>
+        </tr>
+    </tbody>
+</table>
