@@ -19,7 +19,7 @@
         };
 
         /** @ngInject */
-        function characterSelectionCtrl($log, $location, toastr, characterSelectionSvc) {
+        function characterSelectionCtrl($log, $location, toastr, characterSelectionSvc, characterData) {
             // Ensure that onCharacterSelection is a function, otherwise throw programmer error!
             if(!angular.isFunction(this.onCharacterSelection)) {
                 throw new Error(
@@ -29,14 +29,10 @@
             }
             var charSel = this;
             
-            this.attackChars = characterSelectionSvc
-                .getAvailableCharactersByGroup(characterSelectionSvc.ATTACK_GROUP);
-            this.defenseChars = characterSelectionSvc
-                .getAvailableCharactersByGroup(characterSelectionSvc.DEFENSE_GROUP);
-            this.tankChars = characterSelectionSvc
-                .getAvailableCharactersByGroup(characterSelectionSvc.TANK_GROUP);
-            this.supportChars = characterSelectionSvc
-                .getAvailableCharactersByGroup(characterSelectionSvc.SUPPORT_GROUP);
+            this.attackChars = characterData.attackCharacterObjectArray;
+            this.defenseChars = characterData.defenseCharacterObjectArray;
+            this.tankChars = characterData.tankCharacterObjectArray;
+            this.supportChars = characterData.supportCharacterObjectArray;
 
             // Initialize selection based on getParams
             characterSelectionSvc.getParamsToSelection($location);
