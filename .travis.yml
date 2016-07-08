@@ -1,0 +1,14 @@
+branches:
+  only:
+    - travis-ci
+language: node_js
+node_js:
+- '0.10'
+before_script:
+- npm install -g gulp
+- npm install -g bower
+script: npm run-script deploy
+env:
+  global:
+    - GITHUB_REPO: "rjoudrey/OWCast"
+    - secure: F84OuOjKLMYQVKDUeEWh1W38EYw45+QFBsiM37Dg/1eYXj4EjpvZf8QvHJyAZHKfEMFgWUNpdV6eeKSan53cccnrryMtAkSyR7dX0GoGQWUai3O80gOGtLVScpLdfyic2gMybHmQ98vUwPwNJg1q6qAueG71GFN+H8+FTLOxIBJof2Zy++U9rWORYtNPD1Lw1JooirJ70DteEUcPjMx46I2rrJmh1dbj/zVPwiuJlMXPfQTEfZ1bib67YtbBNNMCMue7BaXkEvmF21Kj5Vk9qe1mgHXir2v4Cda3QXdFcIkbA7drbmYQqLnCq2b7+BopNhUqNyMzysmbdsDFIFjB04+7HY1PRJhsLrKHc8xgZzdbNQuhH2gGjrjnbHeT9L8jQD9qyNwal92chBKhdkZ2hSFZEE7z5fQesv2EVzH1xBGSCqYI5AwzN6Qfa+ZpVns3AC14CllnVepKJlAANQt4xNtnvI+CQ29R3/5qDwfpOGvq5o4vxgoILsvsHSAxwXqXP/DRznHuxHcbmNJAQ4ndX2FhkiO80Q+U4p7EVcdf+0fEiBkRKsOOnMfRUj8D+bf9I8dy6e5AIo+e9fugzuEYHvt6kgAqakGpRAvO7yOkKacPi+lpdERUyyfNDza7ly4ThxurtOBDzQ0+oflphXqZXH5ts+RSaBQu6mqxmQM7ocs=
