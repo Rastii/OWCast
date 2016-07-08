@@ -1,3 +1,12 @@
+# To create secure:
+# 1. Go to https://github.com/settings/tokens/new
+# 2. Enable 'public_repo' access
+# 3. gem install travis;
+# 4. travis encrypt -r user/repo GITHUB_TOKEN=[the token here]
+#    (e.g. travis encrypt -r rjoudrey/OWCast GITHUB_TOKEN=mytoken)
+
+# Also set GITHUB_REPO to "user/repo" (e.g. "rjoudrey/OWCast")
+
 branches:
   only:
     - travis-ci
