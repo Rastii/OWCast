@@ -163,12 +163,23 @@
         supportCharacterArray
     );
 
+    // TODO: Do a full character iteration once...
     var allCharacterNamesArray = [];
     // Keep a reference of all the available character names as a lookup "dictionary"
     // We can then use this to log potential errors of invalid characters being used.
     var allCharacterNames = allCharacterArray.reduce(function(obj, char) {
         obj[char.name] = true;
         allCharacterNamesArray.push(char.name);
+        return obj;
+    }, {});
+
+    // This is merely a single digit identifier that is to be used with exporting data in the URL.
+    var charCode = 0x41;
+    var characterToCompressedLookup = {};
+    var compressedCharacterLookup = allCharacterNamesArray.reduce(function(obj, name) {
+        var c = String.fromCharCode(charCode++);
+        obj[String.fromCharCode(charCode)] = name;
+        characterToCompressedLookup[name] = c;
         return obj;
     }, {});
 
@@ -207,6 +218,13 @@
          * @type {Object}
          */
         this.allCharacterIdentifierLookup = Object.freeze(allCharacterNames);
+
+        /**
+         * An object that contains a unique (single digit) identifier for each character.
+         * @type {Object}
+         */
+        this.compressedIdentifierLookup = Object.freeze(compressedCharacterLookup);
+        this.identifierToCompressedLookup = Object.freeze(characterToCompressedLookup);
     }
 
 })();

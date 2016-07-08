@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('owcast', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngRoute', 'ui.bootstrap', 'toastr']);
+    .module('owcast', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngRoute', 'ui.bootstrap', 'toastr', 'lz-string']);
 
 })();

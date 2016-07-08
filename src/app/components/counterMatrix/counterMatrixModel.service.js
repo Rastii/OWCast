@@ -6,11 +6,14 @@
         .factory('CounterMatrixModel', CounterMatrixModel);
 
     /** @ngInject */
-    function CounterMatrixModel($log, characterData) {
+    function CounterMatrixModel($log, characterData, LZString) {
         var allCharacters = characterData.allCharacterIdentifierArray;
 
-        function Model(initialData) {
+        function Model(name, initialData, lz) {
+            name = name || "";
             initialData = angular.copy(initialData) || {};
+            this.name = name;
+            this.__name = name;
             this.data = this.init(initialData);
             // Keep a copy of the original data to be used for restoring
             this.__data = angular.copy(initialData);
@@ -82,12 +85,40 @@
         };
 
         Model.prototype.reset = function() {
+            this.name = this.__name;
             this.data = angular.copy(this.__data);
         };
 
         Model.prototype.save = function() {
+            this.__name = this.name;
             this.__data = angular.copy(this.data);
         };
+
+        Model.prototype.getExportedData = function() {
+            var allCharacters = characterData.allCharacterIdentifierArray;
+            var identifierToC = characterData.identifierToCompressedLookup;
+            var self = this;
+
+            // Iterate through this models data object and remove any unnecessary values
+            // and return a new "compressed" object.
+            var reducedData = allCharacters.reduce(function(obj, xChar) {
+                var xCharC = identifierToC[xChar];
+                obj[xCharC] = {};
+                allCharacters.forEach(function(yChar) {
+                    var yCharC = identifierToC[yChar];
+                    var value = self.data[xChar][yChar];
+                    // If the value is 0, let's ignore it.  We only want meaningful values (-1 or 1).
+                    if (value === 0) { return; }
+
+                    obj[xCharC][yCharC] = value;
+                });
+
+                return obj;
+            }, {});
+
+            return LZString.compressToBase64(JSON.stringify(reducedData));
+        };
+
 
         return Model;
     }
